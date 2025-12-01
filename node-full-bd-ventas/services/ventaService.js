@@ -1,0 +1,1 @@
+const repo = require('../repository/ventaRepo'); module.exports = { createVenta: repo.createVenta };

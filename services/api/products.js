@@ -1,0 +1,26 @@
+import client from '../client';
+
+export const getProducts = async () => {
+  const response = await client.get('/products');
+  return response.data;
+};
+
+export const getProductById = async (id) => {
+  const response = await client.get(`/products/${id}`);
+  return response.data;
+};
+
+export const createProduct = async (productData) => {
+  const response = await client.post('/products', productData);
+  return response.data;
+};
+
+export const updateProduct = async (id, productData) => {
+  const response = await client.put(`/products/${id}`, productData);
+  return response.data;
+};
+
+export const deleteProduct = async (id) => {
+  const response = await client.delete(`/products/${id}`);
+  return response.data;
+};
