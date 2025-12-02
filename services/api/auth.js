@@ -1,7 +1,8 @@
 import client from '../client';
 
-export const login = async (email, password) => {
-  const response = await client.post('/auth/login', { email, password });
+export const login = async (username, password) => {
+  // backend expects username (campo 'usuario') and password
+  const response = await client.post('/auth/login', { username, password });
   return response.data;
 };
 

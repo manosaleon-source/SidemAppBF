@@ -26,6 +26,14 @@ const SalesPage = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+  if (!salesData || salesData.length === 0) {
+    return (
+      <DashboardLayout>
+        <h1 className="text-2xl font-bold mb-4">Sales Overview</h1>
+        <div>No sales data available (backend endpoint might not be implemented)</div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>

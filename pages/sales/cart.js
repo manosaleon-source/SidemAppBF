@@ -19,7 +19,7 @@ const Cart = () => {
       ) : (
         <div>
           {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} removeFromCart={removeFromCart} />
+            <CartItem key={item.id} item={item} onRemove={removeFromCart} />
           ))}
           <button onClick={handleCheckout} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
             Proceed to Checkout

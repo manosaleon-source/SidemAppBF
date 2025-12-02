@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { api } from '../services/api/auth';
+import * as api from '../services/api/auth';
 
 const AuthContext = createContext();
 
@@ -10,20 +10,26 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const loadUserFromCookies = async () => {
-      const userData = await api.getUser();
-      if (userData) {
-        setUser(userData);
-      }
+    const loadUserFromLocal = () => {
+      try{
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        if (token) setUser({ token });
+      }catch(err){/* ignore */}
       setLoading(false);
     };
-
-    loadUserFromCookies();
+    loadUserFromLocal();
   }, []);
 
   const login = async (credentials) => {
-    const userData = await api.login(credentials);
-    setUser(userData);
+    // credentials expected to contain { username, password }
+    const { username, password } = credentials;
+    const res = await api.login(username, password);
+    // res expected to be { token }
+    const token = res.token;
+    if (token) {
+      try{ localStorage.setItem('token', token); }catch(err){}
+      setUser({ token });
+    }
     router.push('/dashboard');
   };
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/clienteController');
+const ctrl = require('../controllers/productoController');
 const jwt = require('../middlewares/jwt');
 router.get('/', jwt, ctrl.all);
 router.get('/:id', jwt, ctrl.get);

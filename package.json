@@ -9,10 +9,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@nextui-org/react": "latest",
+    "axios": "^1.13.2",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "@nextui-org/react": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "eslint": "latest",

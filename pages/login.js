@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Button, Input } from '@nextui-org/react';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
   const router = useRouter();
@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await login({ username, password });
       router.push('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
@@ -26,10 +26,10 @@ const Login = () => {
         <Input
           clearable
           underlined
-          label="Email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          label="Username"
+          placeholder="Enter your username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <Input

@@ -7,7 +7,7 @@ const CartItem = ({ item, onRemove }) => {
         <img src={item.image} alt={item.name} className="w-16 h-16 object-cover mr-4" />
         <div>
           <h3 className="text-lg font-semibold">{item.name}</h3>
-          <p className="text-gray-600">${item.price.toFixed(2)} x {item.quantity}</p>
+          <p className="text-gray-600">${(item.price || 0).toFixed(2)} x {item.quantity}</p>
         </div>
       </div>
       <button 

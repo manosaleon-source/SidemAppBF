@@ -24,6 +24,12 @@ const OrdersPage = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (!orders || orders.length === 0) return (
+    <DashboardLayout>
+      <h1 className="text-2xl font-bold mb-4">Orders</h1>
+      <div>No orders data available (backend endpoint might not be implemented)</div>
+    </DashboardLayout>
+  );
 
   return (
     <DashboardLayout>

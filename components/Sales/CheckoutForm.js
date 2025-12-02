@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCart } from '../../../hooks/useCart';
 import { Button } from '../../common/Button';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ onCheckout }) => {
   const { cartItems, totalAmount } = useCart();
   const [formData, setFormData] = useState({
     name: '',
@@ -18,8 +18,28 @@ const CheckoutForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle checkout process (e.g., API call to create an order)
-    console.log('Checkout data:', formData);
+    // Build `cabecera` and `items` according to backend `/ventas` structure
+    const cabecera = {
+      codigo: `V-${Date.now()}`,
+      fecha_emision: new Date().toISOString(),
+      descripcion: `Venta para ${formData.name}`,
+      precio_neto: totalAmount, // simplification: no tax split calculation here
+      igv: 0,
+      precio_total: totalAmount,
+      cliente_id: null, // could map to selected customer
+      tipo_documento_id: 1,
+      usuario_id: 1,
+    };
+    const items = cartItems.map(it => ({
+      productos_id: it.id,
+      cantidad: it.quantity || 1,
+      precio_unitario: it.price,
+      precio_total: (it.price || 0) * (it.quantity || 1),
+    }));
+    const payload = { cabecera, items };
+    if (typeof onCheckout === 'function') {
+      onCheckout(payload);
+    }
   };
 
   return (
