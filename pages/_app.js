@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { NextUIProvider } from '@nextui-org/react'
 import { AuthProvider } from '../context/AuthContext'
+import { CartProvider } from '../context/CartContext'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import DashboardLayout from '../components/DashboardLayout'
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }) {
   return (
     <NextUIProvider>
       <AuthProvider>
+        <CartProvider>
         <div className="min-h-screen flex flex-col">
           {isDashboardPage ? (
             <DashboardLayout>
@@ -25,6 +27,7 @@ export default function App({ Component, pageProps }) {
             </>
           )}
         </div>
+        </CartProvider>
       </AuthProvider>
     </NextUIProvider>
   )

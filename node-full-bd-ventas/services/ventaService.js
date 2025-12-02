@@ -1,1 +1,1 @@
-const repo = require('../repository/ventaRepo'); module.exports = { createVenta: repo.createVenta };
+const repo = require('../repository/ventaRepo'); module.exports = { createVenta: repo.createVenta, all: repo.all };

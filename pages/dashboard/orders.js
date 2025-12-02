@@ -49,9 +49,9 @@ const OrdersPage = () => {
             <tr key={order.id}>
               <td className="py-2 px-4 border-b">{order.id}</td>
               <td className="py-2 px-4 border-b">{order.customerName}</td>
-              <td className="py-2 px-4 border-b">${order.total.toFixed(2)}</td>
-              <td className="py-2 px-4 border-b">{order.status}</td>
-              <td className="py-2 px-4 border-b">{new Date(order.date).toLocaleDateString()}</td>
+              <td className="py-2 px-4 border-b">${(order.total || 0).toFixed(2)}</td>
+              <td className="py-2 px-4 border-b">{order.status || 'N/A'}</td>
+              <td className="py-2 px-4 border-b">{order.date ? new Date(order.date).toLocaleDateString() : 'N/A'}</td>
             </tr>
           ))}
         </tbody>

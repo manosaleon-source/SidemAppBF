@@ -25,3 +25,14 @@ async function createVenta(cabecera, items){
 }
 
 module.exports = { createVenta };
+
+async function all(){
+  // Join ventas_cabecera with cliente for listing in dashboard
+  const [rows] = await pool.query(
+    `SELECT vc.id, vc.codigo, vc.fecha_emision, vc.descripcion, vc.precio_total, c.nombres, c.apellidos
+     FROM ventas_cabecera vc
+     LEFT JOIN cliente c ON c.id = vc.cliente_id
+     ORDER BY vc.fecha_emision DESC`);
+  // Map to a simple model
+  return rows.map(r=>({ id: r.id, codigo: r.codigo, date: r.fecha_emision, description: r.descripcion, total: r.precio_total, customerName: `${r.nombres||''} ${r.apellidos||''}`.trim() }));
+}

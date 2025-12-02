@@ -6,4 +6,8 @@ async function login(req,res){
     res.json(r);
   }catch(err){ res.status(401).json({error: err.message}); }
 }
-module.exports = { login };
+async function me(req,res){
+  if(!req.user) return res.status(401).json({error:'No token'});
+  res.json({ id: req.user.id, username: req.user.username });
+}
+module.exports = { login, me };

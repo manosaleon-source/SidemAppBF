@@ -1,13 +1,11 @@
 import Link from 'next/link';
-import { Navbar as NextUINavbar, Text } from '@nextui-org/react';
+import { Navbar as NextUINavbar } from '@nextui-org/react';
 
 const Navbar = () => {
   return (
     <NextUINavbar>
       <NextUINavbar.Brand>
-        <Text b color="inherit" hideIn="xs">
-          Sales Dashboard
-        </Text>
+        <span className="font-bold hidden xs:inline">Sales Dashboard</span>
       </NextUINavbar.Brand>
       <NextUINavbar.Content>
         <NextUINavbar.Link as={Link} href="/dashboard">
